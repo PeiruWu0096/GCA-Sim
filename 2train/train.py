@@ -113,16 +113,16 @@ def set_seed(seed: int = 42):
 # ==================== 0. Setup & Configuration ====================
 # ---- Data paths ----
 PATHS = {
-    'train_graphml': r'0data/meta/train/graphml',
-    'train_pre':     r'0data/meta/train/pre',
-    'val_graphml':   r'0data/meta/validation/graphml',
-    'val_pre':       r'0data/meta/validation/pre',
-    'save_root':     r'0data/output/trainsave',
-    'tmp_cache':     r'0data/output/trainsave/tmp_cache',
+    'train_root': r'0data/meta/train',            
+    'train_pre':  r'0data/meta/train/pre',     
+    'val_root':   r'0data/meta/validation',         
+    'val_pre':    r'0data/meta/validation/pre',     
+    'save_root':  r'0data/output/trainsave',
+    'tmp_cache':  r'0data/output/trainsave/tmp_cache',
 }
 
-TRAIN_PATHS = {'mixed': PATHS['train_graphml']}
-VAL_PATHS   = {'mixed': PATHS['val_graphml']}
+TRAIN_PATHS = {'mixed': os.path.join(PATHS['train_root'], 'graphml')}
+VAL_PATHS   = {'mixed': os.path.join(PATHS['val_root'],  'graphml')}
 SAVE_ROOT   = PATHS['save_root']
 
 class PrecomputeModule:
@@ -282,6 +282,13 @@ def _self_sanity_check_undeclared_refs():
 _self_sanity_check_undeclared_refs()
 
 # ==================== 1. Precompute module ====================
+class PrecomputeModule:
+    """Load precomputed data + optional on-disk cache; supports delete-after-use."""
+    # Keep paths in sync with the top-level PATHS dict you already moved.
+    pre_train_paths = {'mixed': PATHS['train_pre']}
+    pre_val_paths   = {'mixed': PATHS['val_pre']}
+    CACHE = {}
+
     @staticmethod
     def _path_map(graph_path):
         for s, root in TRAIN_PATHS.items():
@@ -2030,7 +2037,7 @@ class Trainer:
         print("\n===== Stage 1: Random Search on First Group =====")
         scale = 'mixed'
         first_group_path = groups_per_scale[scale][0]
-        first_group_files = sorted([os.path.join(first_group_path, f) for f in os.listdir(first_group_path)])
+        first_group_files = sorted([os.path.join(first_group_path, f) for f in os.listdir(first_group_path) if f.endswith('.graphml')])
         val_root = VAL_PATHS[scale]
         val_groups = sorted([os.path.join(val_root, d) for d in os.listdir(val_root) if d.startswith('group')])
         val_group_lists = [sorted([os.path.join(gdir, f) for f in os.listdir(gdir) if f.endswith('.graphml')]) for gdir in val_groups]
@@ -2053,7 +2060,7 @@ class Trainer:
             for gi, grp in enumerate(groups_per_scale[scale]):
                 if self._seed_should_stop:
                     break
-                tg = sorted([os.path.join(grp, f) for f in os.listdir(grp)])
+                tg = sorted([os.path.join(grp, f) for f in os.listdir(grp) if f.endswith('.graphml')])
                 group_name = os.path.basename(grp)
                 print(f"\n===== Finetuning on {scale} / {group_name} =====")
                 done = 0
