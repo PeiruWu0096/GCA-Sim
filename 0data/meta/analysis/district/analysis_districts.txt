@@ -1,0 +1,50 @@
+1st Arrondissement, Paris, France
+2nd Arrondissement, Paris, France
+3rd Arrondissement, Paris, France
+Arada, Addis Ababa, Ethiopia
+Basmanny, Moscow, Russia
+Brooklyn, New York, United States
+Camden, London, United Kingdom
+Central Jakarta, Jakarta, Indonesia
+Centro, Madrid, Spain
+Centro, Rio de Janeiro, Brazil
+Chamberí, Madrid, Spain
+Chaoyang District, Beijing, China
+Chapinero, Bogota, Colombia
+Charlottenburg-Wilmersdorf, Berlin, Germany
+City of London, London, United Kingdom
+City of Westminster, London, United Kingdom
+District 1, Ho Chi Minh City, Vietnam
+Dongcheng District, Beijing, China
+Downtown, Vancouver, Canada
+Friedrichshain-Kreuzberg, Berlin, Germany
+Futian District, Shenzhen, China
+Gangnam-gu, Seoul, South Korea
+Gombe, Kinshasa, Democratic Republic of the Congo
+Innere Stadt, Vienna, Austria
+Ixelles, Brussels, Belgium
+Jongno-gu, Seoul, South Korea
+Jung-gu, Seoul, South Korea
+Lagos Island, Lagos, Nigeria
+Le Plateau, Abidjan, Côte d’Ivoire
+Leopoldstadt, Vienna, Austria
+Loop, Chicago, United States
+Manhattan, New York, United States
+Mitte, Berlin, Germany
+Mumbai City, Mumbai, India
+Municipio I, Rome, Italy
+Old Toronto, Toronto, Canada
+Phra Nakhon, Bangkok, Thailand
+Presnensky District, Moscow, Russia
+República, São Paulo, Brazil
+Salamanca, Madrid, Spain
+Sé, São Paulo, Brazil
+Shibuya Ward, Tokyo, Japan
+Shinjuku Ward, Tokyo, Japan
+Sidi Belyout, Casablanca, Morocco
+Starehe, Nairobi, Kenya
+Tverskoy District, Moscow, Russia
+Xicheng District, Beijing, China
+Xuhui District, Shanghai, China
+Yangpu District, Shanghai, China
+Zona 1, Guatemala City, Guatemala
