@@ -1,0 +1,9 @@
+numpy>=2.3.2
+scipy>=1.16.1
+scikit-learn>=1.7.1
+networkx>=3.5
+matplotlib>=3.10.5
+osmnx>=2.0.6
+torch>=2.8.0
+psutil>=5.9.0
+sympy>=1.12
