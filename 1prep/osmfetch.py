@@ -70,7 +70,7 @@ def main():
     parser.add_argument(
         "list_root",
         nargs="?",
-        default="0data/meta/analysis",
+        default=LIST_ROOT,
         help="Folder containing .txt lists (relative to repo root)."
     )
     args = parser.parse_args()
@@ -131,3 +131,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
