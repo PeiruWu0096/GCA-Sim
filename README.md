@@ -14,7 +14,7 @@ The download lists required for different operations are grouped under `\0data\m
 - use `\1prep\osmfetch.py` to fetch each road network directly from OSM, or
 - download the needed data manually from the **[URL](https://github.com/PeiruWu0096/GCA-Sim/releases/tag/v0.1.0)** and place the files in the corresponding locations.
 
-**Note:** If you downloaded the data from Releases, unzip it and replace the `\0data\meta` folder.
+**Note:** If you downloaded the data from Releases, unzip it and replace the `\0data\meta` folder. Because downloading via code may often fail, it is recommended to directly use the compressed package from the Releases.
 
 ### 1.2 Precomputation
 
