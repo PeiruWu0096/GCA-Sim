@@ -666,26 +666,26 @@ def main():
         edge_src  = pre_cpu['edge_src'].to(DEVICE, non_blocking=True)
         edge_dst  = pre_cpu['edge_dst'].to(DEVICE, non_blocking=True)
 
-        ns = pre_cpu['node_states']
-        ns = ns if ns.dim() == 2 else ns.view(-1, 1)
-        cur = ns.to(DEVICE, dtype=torch.float32)
-
-        N = cur.size(0)
-        deg = torch.zeros(N, dtype=torch.float32, device=DEVICE)
+        # Initial state aligned with lmain: use out-degree (deg0) as x_{t=0}
+        N = pre_cpu['node_states'].numel() if pre_cpu['node_states'].dim() == 1 else pre_cpu['node_states'].size(0)
+        deg = torch.zeros((N, 1), dtype=torch.float32, device=DEVICE)
         if edge_src.numel() > 0:
-            deg.index_add_(0, edge_src, torch.ones(edge_src.numel(), dtype=torch.float32, device=DEVICE))
-            deg = deg.clamp_min(1e-6)
+            ones_e = torch.ones(edge_src.numel(), dtype=torch.float32, device=DEVICE)
+            deg.index_add_(0, edge_src, ones_e.unsqueeze(1))
+        cur = deg  # [N,1]
 
+        # Iteration aligned with lmain: x_{t+1} = x_t - mean_nei(x_t)
         states = []
         with torch.no_grad():
             for _ in range(NUM_ITER):
                 if edge_src.numel() == 0:
                     nxt = cur
                 else:
-                    w = (1.0 / deg[edge_src]).view(-1, 1)                # D^{-1}
-                    msg = cur[edge_src] * w                               # A row-normalized
-                    nxt = torch.zeros_like(cur)
-                    nxt.index_add_(0, edge_dst, msg)                      # x_{t+1} = D^{-1}A x_t
+                    # sum over neighbors v of x_t(v) for each source u
+                    sum_nei = torch.zeros_like(cur).index_add_(0, edge_src, cur[edge_dst])
+                    deg_safe = deg.clamp_min(1.0)  # node-wise guard to avoid divide-by-zero
+                    mean_nei = sum_nei / deg_safe
+                    nxt = cur - mean_nei
                 cur = nxt
                 states.append(cur.detach())
         all_states.append(states)
