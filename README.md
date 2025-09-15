@@ -12,9 +12,9 @@ Official code and materials for: “A Framework Based on Graph Cellular Automata
 
 The download lists required for different operations are grouped under `\0data\meta`. You can:
 - use `\1prep\osmfetch.py` to fetch each road network directly from OSM, or
-- download the needed data manually from the **URL** and place the files in the corresponding locations.
+- download the needed data manually from the **[URL](https://github.com/PeiruWu0096/GCA-Sim/releases/tag/v0.1.0)** and place the files in the corresponding locations.
 
-**Note:** If you download via URL, create a `graphml` folder at the same path as the relevant `.txt` file. Under `graphml`, create subfolders named starting from `group_01` to store each group of networks. For example, place district-level networks in the analysis set under `\0data\meta\analysis\district\graphml\group_01`. You may also download other networks and put them in the corresponding locations.
+**Note:** If you downloaded the data from Releases, unzip it and replace the `\0data\meta` folder.
 
 ### 1.2 Precomputation
 
